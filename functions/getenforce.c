@@ -9,7 +9,7 @@ int getenforce_main(int argc, char **argv)
 {
   if (argv[1]) {
     usage();
-  } else if (selinux_enabled_status() == 1) {
+  } else if (if_file_exists(ENFORCE_FILE) == 1) {
     int selinux_status;
     FILE *selinux_file;
     if ((selinux_file = fopen(ENFORCE_FILE, "r")) == NULL) {

@@ -2,32 +2,33 @@
 
 static void usage(void)
 {
-  printf("usage: "PROGRAM_NAME" [function [arguments]...]\n");
+  printf("usage: multibox [function [arguments]...]\n\n");
+  printf("Options:\n");
+  printf("\t-h, --help\tPrint help message.\n");
+  printf("\t-l, --list\tPrint list functions.\n");
+  printf("\t-v, --version\tPrint version.\n");
+  printf("\nAvailable functions [%d]:\n", function_count);
+  print_function();
 }
 
 int main(int argc, char **argv)
 {
-  if (strncmp(basename(argv[0]), PROGRAM_NAME, strlen(PROGRAM_NAME)) == 0) {
+  if (strncmp(basename(argv[0]), "multibox", 8) == 0) {
     if (!argv[1]) {
       usage();
     }
-    else if (argv[1][0]=='-' && argv[1][1]=='h' && argv[1][2]=='\0') {
+    else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
       usage();
     }
-    else if (argv[1][0]=='-' && argv[1][1]=='v' && argv[1][2]=='\0') {
-      printf(PROGRAM_NAME" "PROGRAM_VERSION"\n");
+    else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0) {
+      printf("multibox "PROGRAM_VERSION"\n");
     }
-    else if (argv[1][0]=='-' && argv[1][1]=='l' && argv[1][2]=='\0') {
+    else if (strcmp(argv[1], "-l") == 0 || strcmp(argv[1], "--list") == 0) {
       if (function_count <= 0) {
         printf("No functions available\n");
       }
       else {
-        printf("Available functions [%d]:\n        ", function_count);
-        int count = function_count - 1;
-        for (int i = 0; i < count; i++) {
-          printf("%s, ", function_list[i]);
-        }
-        printf("%s\n", function_list[count]);
+        print_function_list();
       }
     }
     else {

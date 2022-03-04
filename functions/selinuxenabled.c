@@ -10,5 +10,8 @@ int selinuxenabled_main(int argc, char **argv)
   if (argv[1]) {
     usage();
   }
-  return !selinux_enabled_status();
+  if (if_file_exists(ENFORCE_FILE) == 1) {
+    return 0;
+  }
+  return 1;
 }

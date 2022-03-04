@@ -3,23 +3,18 @@
 int multibox(int argc, char **argv, char *func_name)
 {
   if (!func_name) {
-    printf(PROGRAM_NAME": error\n");
+    printf("multibox: error\n");
     return 1;
   }
 
-#ifdef CONFIG_HELLO
-  else if (strcmp(func_name, "hello") == 0) {
-    return hello_main(argc, argv);
+#ifdef CONFIG_GETENFORCE
+  else if (strcmp(func_name, "getenforce") == 0) {
+    return getenforce_main(argc, argv);
   }
 #endif
 #ifdef CONFIG_SELINUXENABLED
   else if (strcmp(func_name, "selinuxenabled") == 0) {
     return selinuxenabled_main(argc, argv);
-  }
-#endif
-#ifdef CONFIG_GETENFORCE
-  else if (strcmp(func_name, "getenforce") == 0) {
-    return getenforce_main(argc, argv);
   }
 #endif
 #ifdef CONFIG_SETENFORCE

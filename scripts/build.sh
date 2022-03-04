@@ -4,13 +4,14 @@ DIR="$(cd "$(dirname "$0")" && pwd)"/..
 cd $DIR
 
 if [ ! -f $DIR/.config ]; then
-  echo ".config not found!"
-  exit 0
+  echo "  GEN   .config"
+  cp $DIR/configs/defconfig $DIR/.config
 fi
 
 source $DIR/.config
 
 CC=gcc
+STRIP=strip
 CFLAGS=$CONFIG_CFLAGS
 LDFLAGS=$CONFIG_LDFLAGS
 LDFILES=""
@@ -21,40 +22,35 @@ fi
 
 cc_file() {
   echo "  CC    $2"
-  $CC -w -Iinclude $CFLAGS -c $1 -o $2
+  $CC -Iinclude $CFLAGS -c $1 -o $2
   LDFILES=$LDFILES" $2"
 }
 
-gen_file() {
-  if [ $2 == "y" ]; then
-    status=1
-  else
-    status=0
+gen_config() {
+  echo "  GEN   include/config.h"
+  rm -rf $1 && touch $1
+  echo "#define CONFIG_EXTRAVERSION	\"$CONFIG_EXTRAVERSION\"" >> $1
+
+  if [ $CONFIG_GETENFORCE == "y" ]; then
+    echo "#define CONFIG_GETENFORCE	1" >> $1
   fi
-  echo "#define "$1" "$status >> $DIR/include/autoconf.h
+
+  if [ $CONFIG_SELINUXENABLED == "y" ]; then
+    echo "#define CONFIG_SELINUXENABLED	1" >> $1
+  fi
+
+  if [ $CONFIG_SETENFORCE == "y" ]; then
+    echo "#define CONFIG_SETENFORCE	1" >> $1
+  fi
 }
 
-gen_string() {
-  echo "#define $1 \"$2\"" >> $DIR/include/autoconf.h
-}
-
-rm -rf $DIR/include/autoconf.h
-echo "  GEN   include/autoconf.h"
-gen_string CONFIG_EXTRAVERSION $CONFIG_EXTRAVERSION
-
-gen_file CONFIG_HELLO $CONFIG_HELLO
-gen_file CONFIG_GETENFORCE $CONFIG_GETENFORCE
-gen_file CONFIG_SELINUXENABLED $CONFIG_SELINUXENABLED
-gen_file CONFIG_SETENFORCE $CONFIG_SETENFORCE
+gen_config $DIR/include/config.h
 
 cc_file main/function_list.c main/function_list.o
 cc_file main/main.c main/main.o
 cc_file main/multibox.c main/multibox.o
-cc_file libs/selinux_enabled_status.c libs/selinux_enabled_status.o
-
-if [ $CONFIG_HELLO == "y" ]; then
-  cc_file functions/hello.c functions/hello.o
-fi
+cc_file libs/if_file_exists.c libs/if_file_exists.o
+cc_file libs/get_terminal_size.c libs/get_terminal_size.o
 
 if [ $CONFIG_GETENFORCE == "y" ]; then
   cc_file functions/getenforce.c functions/getenforce.o
@@ -69,4 +65,5 @@ if [ $CONFIG_SETENFORCE == "y" ]; then
 fi
 
 echo "  LD    multibox"
-$CC -w $LDFLAGS -s $LDFILES -o multibox
+$CC -w $LDFLAGS $LDFILES -o multibox
+$STRIP --strip-unneeded multibox

@@ -20,20 +20,23 @@ int selinuxenabled_main(int, char *[]);
 int setenforce_main(int, char *[]);
 #endif
 
-
 #define ENFORCE_FILE "/sys/fs/selinux/enforce"
 
 int multibox(int, char *[], char *);
 
 extern char *function_list[];
 extern int function_count;
+void print_all_function(void);
+void print_function_list(void);
 
-int if_file_exists(char *);
+int file_exists(char *);
+int dirr_exists(char *);
+
+int get_terminal_size(char);
 int get_terminal_width(void);
 int get_terminal_height(void);
 
-void print_function(void);
-void print_function_list(void);
+FILE* open_file_for_read(const char *path);
+FILE* open_file_for_write(const char *path);
 
-
-#define PROGRAM_VERSION "0.0.1"CONFIG_EXTRAVERSION
+#define PROGRAM_VERSION "multibox 0.0.1"CONFIG_EXTRAVERSION

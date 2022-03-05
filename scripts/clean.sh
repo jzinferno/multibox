@@ -3,13 +3,7 @@
 DIR="$(cd "$(dirname "$0")" && pwd)"/..
 cd $DIR
 
-funcc() {
-  for p in multibox .config include/config.h */*.o; do
-    if [ -f $p ]; then
-      echo -n $p' '
-    fi
-  done
-}
+clean_files="multibox .config include/config.h obj"
 
-echo "rm -rf $(funcc)"
-rm -rf $(funcc)
+echo "rm -rf $clean_files"
+rm -rf $clean_files

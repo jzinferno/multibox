@@ -6,17 +6,17 @@ int multibox(int argc, char **argv, char *func_name) {
 		return 1;
 	}
 
-	#ifdef CONFIG_GETENFORCE
+	#ifdef _GETENFORCE
 	else if (strcmp(func_name, "getenforce") == 0) {
 		return getenforce_main(argc, argv);
 	}
 	#endif
-	#ifdef CONFIG_SELINUXENABLED
+	#ifdef _SELINUXENABLED
 	else if (strcmp(func_name, "selinuxenabled") == 0) {
 		return selinuxenabled_main(argc, argv);
 	}
 	#endif
-	#ifdef CONFIG_SETENFORCE
+	#ifdef _SETENFORCE
 	else if (strcmp(func_name, "setenforce") == 0) {
 		return setenforce_main(argc, argv);
 	}

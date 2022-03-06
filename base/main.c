@@ -9,6 +9,10 @@ static void usage(void) {
 	print_all_function();
 }
 
+void print_version(void) {
+	printf("multibox "_VERSION"\n");
+}
+
 int main(int argc, char **argv) {
 	if (strncmp(basename(argv[0]), "multibox", 8) == 0) {
 		if (!argv[1]) {
@@ -18,15 +22,10 @@ int main(int argc, char **argv) {
 			usage();
 		}
 		else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0) {
-			puts(PROGRAM_VERSION);
+			print_version();
 		}
 		else if (strcmp(argv[1], "-l") == 0 || strcmp(argv[1], "--list") == 0) {
-			if (function_count <= 0) {
-				printf("No functions available\n");
-			}
-			else {
-				print_function_list();
-			}
+			print_function_list();
 		}
 		else {
 			argv[0] = NULL;

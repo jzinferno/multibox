@@ -1,13 +1,13 @@
 #include "multibox.h"
 
 char *function_list[] = {
-	#ifdef CONFIG_GETENFORCE
+	#ifdef _GETENFORCE
 	"getenforce",
 	#endif
-	#ifdef CONFIG_SELINUXENABLED
+	#ifdef _SELINUXENABLED
 	"selinuxenabled",
 	#endif
-	#ifdef CONFIG_SETENFORCE
+	#ifdef _SETENFORCE
 	"setenforce",
 	#endif
 };

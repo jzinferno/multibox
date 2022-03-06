@@ -17,7 +17,7 @@ int setenforce_main(int argc, char **argv) {
 		usage();
 		return 1;
 	}
-	if (file_exists(ENFORCE_FILE) == 1) {
+	if (file_or_dir_exists(ENFORCE_FILE) == 1) {
 		FILE *enforce_file = open_file_for_write(ENFORCE_FILE);
 		if(enforce_file == NULL) {
 			puts("Permission denied!");

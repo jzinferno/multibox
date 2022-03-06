@@ -8,7 +8,7 @@ int selinuxenabled_main(int argc, char **argv) {
 	if (argv[1]) {
 		usage();
 	}
-	if (file_exists(ENFORCE_FILE) == 1) {
+	if (file_or_dir_exists(ENFORCE_FILE) == 1) {
 		return 0;
 	}
 	return 1;

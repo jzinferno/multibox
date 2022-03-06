@@ -7,7 +7,7 @@ static void usage(void) {
 int getenforce_main(int argc, char **argv) {
 	if (argv[1]) {
 		usage();
-	} else if (file_exists(ENFORCE_FILE) == 1) {
+	} else if (file_or_dir_exists(ENFORCE_FILE) == 1) {
 		char selinux_status;
 		FILE *selinux_file = open_file_for_read(ENFORCE_FILE);
 		if (selinux_file == NULL) {

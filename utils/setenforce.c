@@ -1,4 +1,4 @@
-#include "multibox.h"
+#include "jzinferno.h"
 
 static void usage(void) {
 	puts("usage: setenforce [1|0]");

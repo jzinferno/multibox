@@ -12,9 +12,8 @@
 
 int file_or_dir_exists(char *);
 
-int get_terminal_size(char);
-int get_terminal_width(void);
 int get_terminal_height(void);
+int get_terminal_width(void);
 
 FILE* open_file_for_read(const char *path);
 FILE* open_file_for_write(const char *path);

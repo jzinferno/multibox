@@ -1,4 +1,4 @@
-#include "multibox.h"
+#include "jzinferno.h"
 
 FILE* open_file_for_read(const char *path) {
 	return fopen(path, "r");

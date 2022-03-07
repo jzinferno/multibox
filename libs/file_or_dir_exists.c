@@ -1,4 +1,4 @@
-#include "multibox.h"
+#include "jzinferno.h"
 
 int file_or_dir_exists(char *file) {
 	struct stat buffer;

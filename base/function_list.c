@@ -1,13 +1,13 @@
-#include "multibox.h"
+#include "jzinferno.h"
 
 char *function_list[] = {
-	#ifdef _GETENFORCE
+	#ifdef _GETENFORCE_
 	"getenforce",
 	#endif
-	#ifdef _SELINUXENABLED
+	#ifdef _SELINUXENABLED_
 	"selinuxenabled",
 	#endif
-	#ifdef _SETENFORCE
+	#ifdef _SETENFORCE_
 	"setenforce",
 	#endif
 };
@@ -15,9 +15,7 @@ char *function_list[] = {
 int function_count = sizeof(function_list) / sizeof(char*);
 
 void print_all_function(void) {
-	int terminal_width = get_terminal_width();
-	int str_width = 0;
-	int wrd_width = 0;
+	int terminal_width = get_terminal_width(), str_width = 0, wrd_width = 0;
 	printf("Available functions [%d]:\n", function_count);
 	for (int i = 0; i < function_count; i++) {
 		wrd_width = strlen(function_list[i]) + 2;
@@ -37,7 +35,9 @@ void print_all_function(void) {
 		printf("%s", function_list[i]);
 		str_width += wrd_width;
 	}
-	putchar('\n');
+	if (function_count) {
+		putchar('\n');
+	}
 }
 
 void print_function_list(void) {

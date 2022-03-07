@@ -17,4 +17,5 @@ extern int function_count;
 
 void print_all_function(void);
 void print_function_list(void);
+void install_funcs(char *arg);
 int print_version(void);

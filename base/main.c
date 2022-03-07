@@ -4,9 +4,10 @@ static void usage(void) {
 	puts(
 		"Usage: "_PROG_NAME_" [function [arguments]...]\n\n"
 		"Options:\n"
-		"\t-h, --help\tPrint help message.\n"
-		"\t-l, --list\tPrint list functions.\n"
-		"\t-v, --version\tPrint version.\n"
+		"\t-h, --help\tShow this message\n"
+		"\t-i, --install\tInstall functions\n"
+		"\t-l, --list\tShow all functions\n"
+		"\t-v, --version\tShow program version\n"
 	);
 	print_all_function();
 }
@@ -29,6 +30,11 @@ int main(int argc, char **argv) {
 		}
 		else if (!strcmp(argv[1], "-l") || !strcmp(argv[1], "--list")) {
 			print_function_list();
+		}
+		else if (!strcmp(argv[1], "-i") || !strcmp(argv[1], "--install")) {
+			if (argv[2]) {
+				install_funcs(argv[2]);
+			}
 		}
 		else {
 			argv[0] = NULL;

@@ -47,15 +47,17 @@ else
   Q = @
 endif
 
-%.o:%.c Makefile Config.mk
+%.o:%.c Makefile Config.mk include/jzinferno.h
 	$(Q) echo "  CC	$(notdir $(@))"
-	$(Q) $(CC) -c $(CFLAGS) $(DFLAGS) $< -o $@
+	$(Q) $(CC) -c $(CFLAGS) $(DFLAGS) $(<) -o $(@)
 
-all:$(OBJS)
-	$(Q) echo "  LINK	$(PROG_NAME)"
-	$(Q) $(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(PROG_NAME)_unstripped
-	$(Q) cp $(PROG_NAME)_unstripped $(PROG_NAME)
-	$(Q) $(STRIP) $(PROG_NAME)
+$(PROG_NAME):$(OBJS)
+	$(Q) echo "  LINK	$(@)"
+	$(Q) $(CC) $(CFLAGS) $(LDFLAGS) $(^) -o $(@)_unstripped
+	$(Q) cp $(@)_unstripped $(@)
+	$(Q) $(STRIP) $(@)
+
+all:$(OBJS) $(PROG_NAME)
 
 clean:
 	$(Q) echo "clean: $(PROG_NAME) $(PROG_NAME)_unstripped $(OBJS)"

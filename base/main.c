@@ -4,10 +4,10 @@ static void usage(void) {
 	puts(
 		"Usage: "_PROG_NAME_" [function [arguments]...]\n\n"
 		"Options:\n"
-		"\t-h, --help\tShow this message\n"
-		"\t-i, --install\tInstall functions\n"
-		"\t-l, --list\tShow all functions\n"
-		"\t-v, --version\tShow program version\n"
+		"\t-h, --help\tShow this message.\n"
+		"\t-i, --install\tInstall functions.\n"
+		"\t-l, --list\tShow all functions.\n"
+		"\t-v, --version\tShow program version.\n"
 	);
 	print_all_function();
 }

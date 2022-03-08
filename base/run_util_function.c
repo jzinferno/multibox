@@ -1,10 +1,10 @@
 #include "jzinferno.h"
 
-#define _RUN_FUNC if (argv[1] && !strcmp(argv[1], "--version")) {return print_version();} return
+#define _RUN_FUNC if (argv[1] && !strcmp(argv[1], "--version")) { print_version(); return 0; } return
 
 int run_util_function(int argc, char **argv, char *func_name) {
 	if (!func_name) {
-		printf(_PROG_NAME_": error\n");
+		puts(_PROG_NAME_": error");
 		return 1;
 	}
 

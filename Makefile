@@ -10,12 +10,12 @@ PROG_VERSION = $(VERSION)$(CONFIG_EXTRAVERSION)
 CFLAGS := -std=gnu99 -Iinclude $(CONFIG_CFLAGS)
 DFLAGS := -D_PROG_NAME_='"$(PROG_NAME)"' -D_PROG_VERSION_='"$(PROG_VERSION)"'
 LDFLAGS := $(CONFIG_LDFLAGS)
-OBJS := base/function_list.o base/main.o base/run_util_function.o libs/file_or_dir_exists.o libs/get_terminal_size.o libs/open_file.o
+OBJS := base/function_list.o base/main.o base/run_util_function.o libs/file_or_dir_exists.o libs/get_terminal_size.o
 
 ifeq ($(CONFIG_OPTIMIZE_FOR_SIZE),y)
   CFLAGS += -Os
 else
-  CFLAGS += -O2
+  CFLAGS += -O3
 endif
 
 ifeq ($(CONFIG_STATIC),y)
@@ -48,7 +48,7 @@ else
 endif
 
 %.o:%.c Makefile Config.mk include/jzinferno.h
-	$(Q) echo "  CC	$(notdir $(@))"
+	$(Q) echo "  CC	$(@)"
 	$(Q) $(CC) -c $(CFLAGS) $(DFLAGS) $(<) -o $(@)
 
 $(PROG_NAME):$(OBJS)

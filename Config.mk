@@ -4,7 +4,7 @@ CONFIG_LDFLAGS = -Wl,--gc-sections
 
 CONFIG_OPTIMIZE_FOR_SIZE = n
 CONFIG_BUILD_ID = n
-CONFIG_STATIC = n
+CONFIG_STATIC = y
 
 # functions
 

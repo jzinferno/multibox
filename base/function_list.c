@@ -15,7 +15,7 @@ char *function_list[] = {
 int function_count = sizeof(function_list) / sizeof(char*);
 
 void print_all_function(void) {
-	int terminal_width = get_terminal_width();
+	int terminal_width = get_terminal_size("w");
 	int str_width = 0, wrd_width = 0;
 	printf("Available functions [%d]:\n", function_count);
 	for (int i = 0; i < function_count; i++) {
@@ -33,7 +33,7 @@ void print_all_function(void) {
 			putchar(',');
 			putchar(' ');
 		}
-		printf("%s", function_list[i]);
+		fputs(function_list[i], stdout);
 		str_width += wrd_width;
 	}
 	if (function_count) {
@@ -48,8 +48,8 @@ void print_function_list(void) {
 }
 
 void install_funcs(char *arg) {
-	char buff[PATH_MAX], *path;
-	size_t len = readlink("/proc/self/exe", buff, PATH_MAX);
+	char buff[4096], *path;
+	size_t len = readlink("/proc/self/exe", buff, 4096);
 	if (len != -1) {
 		buff[len] = '\0';
 	}

@@ -18,7 +18,7 @@ int setenforce_main(int argc, char **argv) {
 		return 1;
 	}
 	if (file_or_dir_exists(ENFORCE_FILE) == 1) {
-		FILE *enforce_file = open_file_for_write(ENFORCE_FILE);
+		FILE *enforce_file = fopen(ENFORCE_FILE, "w");
 		if(enforce_file == NULL) {
 			puts("Permission denied!");
 			return 1;

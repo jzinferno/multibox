@@ -12,9 +12,8 @@ static void usage(void) {
 	print_all_function();
 }
 
-int print_version(void) {
-	printf(_PROG_NAME_" "_PROG_VERSION_"\n");
-	return 0;
+void print_version(void) {
+	puts(_PROG_NAME_" "_PROG_VERSION_);
 }
 
 int main(int argc, char **argv) {

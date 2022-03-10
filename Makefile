@@ -6,17 +6,11 @@ CC      = $(CROSS_COMPILE)gcc
 STRIP   = $(CROSS_COMPILE)strip
 
 PROG_NAME = multibox
-PROG_VERSION = $(VERSION)$(CONFIG_EXTRAVERSION)
-CFLAGS := -std=gnu99 -Iinclude $(CONFIG_CFLAGS)
-DFLAGS := -D_PROG_NAME_='"$(PROG_NAME)"' -D_PROG_VERSION_='"$(PROG_VERSION)"'
+PROG_VERSION = v$(VERSION)$(CONFIG_EXTRAVERSION)
+CFLAGS := -std=gnu99 -Iinclude -O2 $(CONFIG_CFLAGS)
+DFLAGS := -D_PROG_NAME_='"$(PROG_NAME)"' -D_VERSION_='"$(PROG_VERSION)"'
 LDFLAGS := $(CONFIG_LDFLAGS)
-OBJS := base/function_list.o base/main.o base/run_util_function.o libs/file_or_dir_exists.o libs/get_terminal_size.o
-
-ifeq ($(CONFIG_OPTIMIZE_FOR_SIZE),y)
-  CFLAGS += -Os
-else
-  CFLAGS += -O3
-endif
+OBJS := base/function_list.o base/main.o base/run_util_function.o libs/file_or_dir_exist.o libs/get_terminal_size.o
 
 ifeq ($(CONFIG_STATIC),y)
   LDFLAGS += -static

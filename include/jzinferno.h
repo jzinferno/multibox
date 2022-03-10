@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
@@ -23,12 +24,11 @@ int run_util_function(int, char *[], char *);
 extern char *function_list[];
 extern int function_count;
 
-void print_all_function(void);
-void print_function_list(void);
-void install_funcs(char *arg);
-void print_version(void);
+#ifndef PATH_MAX
+# define PATH_MAX 4096
+#endif
 
 #define ENFORCE_FILE "/sys/fs/selinux/enforce"
 
-int file_or_dir_exists(const char *);
+int file_or_dir_exist(const char *);
 int get_terminal_size(const char *);

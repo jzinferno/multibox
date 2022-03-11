@@ -2,8 +2,8 @@ CONFIG_EXTRAVERSION = -jzinferno
 CONFIG_CFLAGS = -Wall -fomit-frame-pointer -ffunction-sections -fdata-sections
 CONFIG_LDFLAGS = -Wl,--gc-sections
 
-CONFIG_BUILD_ID = n
-CONFIG_STATIC = n
+CONFIG_BUILD_ID = y
+CONFIG_STATIC = y
 
 # functions
 

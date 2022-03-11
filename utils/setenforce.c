@@ -1,20 +1,16 @@
 #include "jzinferno.h"
 
-static void usage(void) {
-	puts("usage: setenforce [1|0]");
-}
-
 int setenforce_main(int argc, char **argv) {
 	char *status;
 	if (!argv[1] || argv[2]) {
-		usage();
+		setenforce_usage();
 		return 1;
 	} else if (argv[1][0] == '1' && argv[1][1] == '\0') {
 		status = "1";
 	} else if (argv[1][0] == '0' && argv[1][1] == '\0') {
 		status = "0";
 	} else {
-		usage();
+		setenforce_usage();
 		return 1;
 	}
 	if (file_or_dir_exist(ENFORCE_FILE) == 1) {

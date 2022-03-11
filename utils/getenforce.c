@@ -1,27 +1,24 @@
 #include "jzinferno.h"
 
-static void usage(void) {
-	puts("usage: getenforce");
-}
-
 int getenforce_main(int argc, char **argv) {
-	if (argv[1]) {
-		usage();
-	} else if (file_or_dir_exist(ENFORCE_FILE) == 1) {
+	if (file_or_dir_exist(ENFORCE_FILE) == 1) {
 		char selinux_status;
 		FILE *selinux_file = fopen(ENFORCE_FILE, "r");
 		if (selinux_file == NULL) {
 			selinux_status = '1';
-		} else {
+		}
+		else {
 			selinux_status = fgetc(selinux_file);
 			fclose(selinux_file);
 		}
 		if (selinux_status == '1') {
 			puts("Enforcing");
-		} else {
+		}
+		else {
 			puts("Permissive");
 		}
-	} else {
+	}
+	else {
 		puts("Disabled");
 	}
 	return 0;

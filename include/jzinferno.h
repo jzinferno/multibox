@@ -9,14 +9,17 @@
 
 #ifdef _GETENFORCE_
 int getenforce_main(int, char *[]);
+void getenforce_usage(void);
 #endif
 
 #ifdef _SELINUXENABLED_
 int selinuxenabled_main(int, char *[]);
+void selinuxenabled_usage(void);
 #endif
 
 #ifdef _SETENFORCE_
 int setenforce_main(int, char *[]);
+void setenforce_usage(void);
 #endif
 
 int run_util_function(int, char *[], char *);

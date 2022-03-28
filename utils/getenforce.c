@@ -1,5 +1,11 @@
 #include "jzinferno.h"
 
+void getenforce_usage(void) {
+	puts(
+		"Usage: getenforce"
+	);
+}
+
 int getenforce_main(int argc, char **argv) {
 	if (file_or_dir_exist(ENFORCE_FILE) == 1) {
 		char selinux_status;

@@ -1,5 +1,11 @@
 #include "jzinferno.h"
 
+void setenforce_usage(void) {
+	puts(
+		"Usage: setenforce [0|1]"
+	);
+}
+
 int setenforce_main(int argc, char **argv) {
 	char *status;
 	if (!argv[1] || argv[2]) {
